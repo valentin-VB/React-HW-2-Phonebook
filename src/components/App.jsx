@@ -23,16 +23,16 @@ export class App extends Component {
       id: nanoid(),
     };
 
+    const isDuplicated = this.state.contacts.some(
+      oldContact => oldContact.name === contact.name
+    );
+
+    if (isDuplicated) {
+      alert(`${contact.name} is already in contacts`);
+      return;
+    }
+
     this.setState(prevState => {
-      const isDuplicated = this.state.contacts.find(
-        oldContact => oldContact.name === contact.name
-      );
-
-      if (isDuplicated) {
-        alert(`${contact.name} is already in contacts`);
-        return;
-      }
-
       return { contacts: [contact, ...prevState.contacts] };
     });
   };
@@ -44,10 +44,8 @@ export class App extends Component {
     // }));
   };
 
-  getVisiableContacts = () => {
+  getVisibleContacts = () => {
     const { contacts, filter } = this.state;
-    const normalizedFilter = filter.toLowerCase();
-    console.log('normalizedFilter', normalizedFilter);
 
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())

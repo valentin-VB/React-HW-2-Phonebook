@@ -2,7 +2,10 @@ import styled from 'styled-components';
 
 export const Btn = styled.button`
   display: block;
-  padding-top: ${p => p.theme.space[3]}px;
+  padding-top: ${p => {
+    console.log('p', p)
+    return p.theme.space[3]px}
+  }
   padding-bottom: ${p => p.theme.space[3]}px;
   padding-left: ${p => p.theme.space[5]}px;
   padding-right: ${p => p.theme.space[5]}px;
